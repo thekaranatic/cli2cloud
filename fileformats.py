@@ -1,6 +1,6 @@
 #python dictionaries containing file formats as keys and their description as values
 
-image_dictionary = {
+dict_f_formats = {
     ".jpg": "JPEG image file",
     ".png": "Portable Network Graphics file",
     ".gif": "Graphics Interchange Format file",
@@ -11,41 +11,37 @@ image_dictionary = {
     ".webp": "WebP image file",
     ".raw": "Raw image file",
     ".pdf": "Portable Document Format file",
-    "ICO" : "Icon File",
-    "WebP" : "WebP Image",
-    "HEIC/HEIF" : "High Efficiency Image Format",
-    "JP2" : "JPEG 2000 Image",
-    "PBM" : "Portable Bitmap Image",
-    "PGM" : "Portable Graymap Image",
-    "PPM" : "Portable Pixmap Image",
-    "XBM" : "X BitMap Image",
-    "WBMP" : "Wireless Bitmap Image"
-}
+    ".ICO" : "Icon File",
+    ".WebP" : "WebP Image",
+    ".HEIC/HEIF" : "High Efficiency Image Format",
+    ".JP2" : "JPEG 2000 Image",
+    ".PBM" : "Portable Bitmap Image",
+    ".PGM" : "Portable Graymap Image",
+    ".PPM" : "Portable Pixmap Image",
+    ".XBM" : "X BitMap Image",
+    ".WBMP" : "Wireless Bitmap Image",
 
-video_dictionary = {
-    "mp4": "MPEG:4 video file",
-    "avi": "Audio Video Interleave file",
-    "mov": "QuickTime video file",
-    "mkv": "Matroska video file",
-    "flv": "Flash video file",
-    "wmv": "Windows Media Video file",
-    "mpg": "MPEG video file",
-    "webm": "WebM video file",
-    "3gp": "3GPP video file",
-    "m4v": "MPEG:4 video file",
-    "ogg": "Ogg video file",
-    "ts": "MPEG transport stream file",
-    "VOB" : "DVD Video Object",
-    "RM" : "RealMedia",
-    "SWF" : "Shockwave Flash",
-    "ASF" : "Advanced Systems Format",
-    "MTS" : "AVCHD Video",
-    "F4V" : "Flash Video",
-    "MXF" : "Material Exchange Format",
-    "AMV" : "Anime Music Video"
-}
+    ".mp4": "MPEG:4 video file",
+    ".avi": "Audio Video Interleave file",
+    ".mov": "QuickTime video file",
+    ".mkv": "Matroska video file",
+    ".flv": "Flash video file",
+    ".wmv": "Windows Media Video file",
+    ".mpg": "MPEG video file",
+    ".webm": "WebM video file",
+    ".3gp": "3GPP video file",
+    ".m4v": "MPEG:4 video file",
+    ".ogg": "Ogg video file",
+    ".ts": "MPEG transport stream file",
+    ".VOB" : "DVD Video Object",
+    ".RM" : "RealMedia",
+    ".SWF" : "Shockwave Flash",
+    ".ASF" : "Advanced Systems Format",
+    ".MTS" : "AVCHD Video",
+    ".F4V" : "Flash Video",
+    ".MXF" : "Material Exchange Format",
+    ".AMV" : "Anime Music Video",
 
-audio_dictionay = {
     "MP3" : "MPEG Audio Layer:3",
     "WAV" : "Waveform Audio File Format",
     "FLAC" : "Free Lossless Audio Codec",
@@ -116,9 +112,7 @@ audio_dictionay = {
     "AIFF:C" : "AIFF:C Sound File",
     "WVE" : "Wondershare Filmora Project File",
     "MPC8" : "Musepack SV8 Audio File",
-}
 
-text_dictionary = {
     "TXT" : "Plain Text File",
     "CSV" : "Comma - Separated Values",
     "XML" : "Extensible Markup Language",
@@ -128,10 +122,8 @@ text_dictionary = {
     "DOC/DOCX" : "Microsoft Word Document",
     "PDF" : "Portable Document Format",
     "EPUB" : "Electronic Publication",
-    "Markdown" : "Markdown Text Format"
-}
+    "Markdown" : "Markdown Text Format",
 
-file_extensions = {
     "EXE": "Executable File",
     "DLL": "Dynamic Link Library",
     "SYS": "System File",
@@ -181,10 +173,8 @@ file_extensions = {
     "APK": "Android Package File",
     "MSI": "Windows Installer Package",
     "DMG": "macOS Disk Image",
-    "ISO": "Disk Image File"
-}
+    "ISO": "Disk Image File",
 
-system_file_formats = {
     "DLL": "Dynamic Link Library",
     "SYS": "System File",
     "EXE": "Executable File",
@@ -234,10 +224,8 @@ system_file_formats = {
     "DLL": "Control Panel Extension File",
     "TTF": "TrueType Font File",
     "CUR": "Cursor Image File",
-    "SYS": "Kernel System File"
-}
+    "SYS": "Kernel System File",
 
-adobe_file_formats = {
     "PSD": "Adobe Photoshop Document",
     "PSB": "Adobe Photoshop Big Document",
     "TIFF": "Tagged Image File Format",
@@ -262,10 +250,8 @@ adobe_file_formats = {
     "WAV": "Waveform Audio File Format",
     "MP3": "MPEG Audio Layer 3",
     "AIFF": "Audio Interchange File Format",
-    "FLAC": "Free Lossless Audio Codec"
-}
+    "FLAC": "Free Lossless Audio Codec",
 
-microsoft_office_formats = {
     "DOC": "Word Document",
     "DOCX": "Word Open XML Document",
     "DOT": "Word Document Template",
@@ -289,3 +275,31 @@ microsoft_office_formats = {
     "PUB": "Publisher Document",
     "ONE": "OneNote Document"
 }
+
+dict_file_formats = [
+    ['.jpg', '.png', '.gif', '.bmp', '.tiff', '.svg', '.ico', '.webp', '.raw', '.pdf', '.ico', '.webp', '.heic/heif', '.jp2', '.pbm', '.pgm', '.ppm', '.xbm', '.wbmp', '.mp4', '.avi', '.mov', '.mkv', '.flv', '.wmv', '.mpg', '.webm', '.3gp', '.m4v', '.ogg', '.ts', '.vob', '.rm', '.swf', '.asf', '.mts', '.f4v', '.mxf', '.amv', 'mp3', 'wav', 'flac', 'aac', 'ogg', 'wma', 'aiff', 'alac', 'm4a', 'ac3', 'amr', 'mp2', 'au', 'midi', 'opus', 'ape', 'dsd', 'mpga', 'ra', 'wv', 'caf', 'mpc', 'spx', 'mp1', 'mod', 'snd', 'adx', 'gsm', 'vqf', 'tta', 'spc', 'eac3', 'wavpack', 'wvx', 'mid', 'dts', 'mka', 'amr:wb', 'atrac', 's3m', 'it', 'xm', 'nsf', 'sid', 'w64', '3ga', 'adpcm', 'sd2', 'voc', 'mpp', 'amr:nb', 'rmi', 'iff', 'mtm', 's3z', 'aifc', 'riff', 'rns', 'ircam', 'pvf', 'arr', 'kar', 'ofr', 'paf', 'au/snd', 'sds', 'aiff:c', 'wve', 'mpc8', 'txt', 'csv', 'xml', 'json', 'html', 'rtf', 'doc/docx', 'pdf', 'epub', 'markdown', 'exe', 'dll', 'sys', 'app', 'bat', 'sh', 'ps1', 'vbs', 'jar', 'apk', 'ipa', 'py', 'pyc', 'rb', 'r', 'pl', 'c', 'cpp', 'h', 'java', 'js', 'css', 'php', 'asp/aspx', 'jsp', 'ts', 'go', 'swift', 'scala', 'ruby', 'perl', 'lua', 'plsql', 'asm', 'vb', 'vbscript', 'matlab', 'octave', 'f90', 'f95', 'cmd', 'swf', 'hta', 'msi', 'dmg', 'iso', 'ini', 'cfg', 'inf', 'lib', 'drv', 'vxd', 'dmp', 'bak', 'nfo', 'reg', 'bin', 'prx', 'dat', 'pnf', 'ico', 'ovl', 'mui', 'sfc', 'bcd', 'nls', 'wim', 'nt', 'ntfs', 'ntuser', 'pf', 'log', 'sam', 'tmp', 'gz', 'p7m', 'rom', 'efi', 'boot', 'key', 'prf', 'cat', 'mbr', 'vhdx', 'ost', 'ttf', 'cur', 'psd', 'psb', 'tiff', 'jpeg', 'png', 'gif', 'ai', 'svg', 'eps', 'indd', 'idml', 'prproj', 'mp4', 'mov', 'avi', 'mxf', 'aep', 'aepx', 'aet', 'xd', 'doc', 'docx', 'dot', 'dotx', 'xls', 'xlsx', 'xlsm', 'xlsb', 'ppt', 'pptx', 'pps', 'ppsx', 'pot', 'potx', 'accdb', 'mdb', 'pst', 'pub', 'one']
+]
+
+
+
+
+# video_dictionary = {
+# }
+
+# audio_dictionay = { 
+# }
+
+# text_dictionary = {   
+# }
+
+# file_extensions = { 
+# }
+
+# system_file_formats = {
+# }
+
+# adobe_file_formats = {
+# }
+
+# microsoft_office_formats = {
+# }
