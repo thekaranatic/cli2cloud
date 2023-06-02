@@ -1,3 +1,5 @@
+#python dictionaries containing file formats as keys and their description as values
+
 image_dictionary = {
     ".jpg": "JPEG image file",
     ".png": "Portable Network Graphics file",
