@@ -523,8 +523,8 @@ dict_file_formats = [
     '.mdb',
     '.pst',
     '.pub',
-    '.one',
-    ]
+    '.one'
+]
 
 
 
