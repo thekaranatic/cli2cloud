@@ -3,11 +3,13 @@ from pathlib import Path
 
 import argparse
 
+from fileformats import dict_file_formats as ext 
+
 # error messages to be prompted
 INVALID_FILETYPE_MSG = "Error: Invalid file format. %s must be .txt file."
 INVALID_PATH_MSG = "Error: Invalid file path/name. Path %s does not exist."
 
-def validate_file(file_name):
+def validate_file(file_name):      
     """Validate file name and path."""
 
     if not valid_filetype(file_name):
@@ -21,7 +23,9 @@ def validate_file(file_name):
 
 def valid_filetype(file_name):
     #validate file type
-    return file_name.endswith(".txt")
+    for extension in ext:
+        return file_name.endswith(extension)
+
 
 def valid_path(path):
     #validate file path

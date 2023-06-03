@@ -5,6 +5,8 @@ from pathlib import Path
 
 import argparse
 
+import fileformats as ext
+
 # the messages below will be used relatively to prompt that there is an error with files
 INVALID_FILETYPE_MSG = "Error: Invalid file format. %s must be .txt file."
 # INVALID_FILETYPE_MSG = "Error: The file is either invalid or we do not support this file. Please check your file again."
@@ -83,4 +85,9 @@ def main():
     parser.add_argument("-det", "--details", type=str, nargs='*',
                         metavar="delete", help="Delete files from the cloud")
     
+    parser.add_argument("-p", "--path", type=str, nargs=1,
+                        metavar="filepath", default=None,
+                        help="Shows file path")
+    
+
     # parser.add_argument("")
