@@ -1,6 +1,6 @@
 #python dictionaries containing file formats as keys and their description as values
 
-dict_f_formats = {
+dict_file_formats = {
     ".jpg": "JPEG image file",
     ".png": "Portable Network Graphics file",
     ".gif": "Graphics Interchange Format file",
@@ -279,7 +279,7 @@ dict_f_formats = {
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #formated the list below 
-dict_file_formats = [
+list_file_formats = [
     '.jpg',
     '.png',
     '.gif',
@@ -292,7 +292,8 @@ dict_file_formats = [
     '.pdf',
     '.ico',
     '.webp',
-    '.heic/heif',
+    '.heic',
+    '.heif',
     '.jp2',
     '.pbm',
     '.pgm',
@@ -383,7 +384,8 @@ dict_file_formats = [
     '.kar',
     '.ofr',
     '.paf',
-    '.au/snd',
+    '.au',
+    '.snd',
     '.sds',
     '.aiff:c',
     '.wve',
@@ -394,7 +396,8 @@ dict_file_formats = [
     '.json',
     '.html',
     '.rtf',
-    '.doc/docx',
+    '.doc',
+    '.docx',
     '.pdf',
     '.epub',
     '.markdown',
@@ -421,7 +424,8 @@ dict_file_formats = [
     '.js',
     '.css',
     '.php',
-    '.asp/aspx',
+    '.asp',
+    '.aspx',
     '.jsp',
     '.ts',
     '.go',
