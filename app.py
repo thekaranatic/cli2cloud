@@ -8,10 +8,10 @@ import argparse
 import fileformats as ext
 
 # the messages below will be used relatively to prompt that there is an error with files
-INVALID_FILETYPE_MSG = "Error: Invalid file format. %s must be .txt file."
+INVALID_FILETYPE_MSG = "Error: Invalid file format. '%s' must be '.txt' file."
 # INVALID_FILETYPE_MSG = "Error: The file is either invalid or we do not support this file. Please check your file again."
 
-INVALID_PATH_MSG = "Error: Invalid file path/name. Path %s does not exist."
+INVALID_PATH_MSG = "Error: Invalid file path/name. Path '%s' does not exist."
 
 def validate_file(filename):
     """
@@ -36,37 +36,98 @@ def validate_filepath(filename):
     return os.path.exists(filename)
 
 def upload(args):
-    pass
+    """
+    Uploads the specified file to the cloud.
+    Returns False if file or filetype is invalid or not in existence.
+    """
+    
+    # get the filename
+    filename = args.upload[0]
+
+    # validate file name/path
+    validate_file(filename)
+
+    # print success message
+    print("%s uploaded successfully" %filename)
+    return
 
 def delete(args):
-    pass
-
-def download(args):
-    pass
-
-def list_files(args):
-    pass
-
-def details(args):
-    pass
-
-def show_path(args):
     """
-    Returns path of the file entered.
-    Returns False if path of the file does not exist.
+    Deletes the specified file from the cloud.
+    Returns False if file or filetype is invalid or not in existence.
     """
 
     # get the filename
-    file = args.path[0]
-    # print(file)
+    filename = args.upload[0]
+
+    # validate file name/path
+    validate_file(filename)
+
+    # print success message
+    print("%s deleted successfully" %filename)
+
+def download(args):
+    """
+    Downloads the specified file from the cloud.
+    Returns False if file or filetype is invalid or not in existence.
+    """
+
+    # get the filename
+    filename = args.upload[0]
+
+    # validate file name/path
+    validate_file(filename)
+
+    # print success message
+    print("%s downloaded successfully in path 'x://y/z'" %filename)
+
+def list_files(args):
+    """
+    Lists all the file present in the cloud.
+    Returns False if file or filetype is invalid or not in existence.
+    """
+
+    # get the filename
+    filename = args.upload[0]
+
+    # validate file name/path
+    validate_file(filename)
+
+    # print success message
+    print("%s deleted successfully" %filename)
+
+def details(args):
+    """
+    Lists out details/metadata of files in the cloud.
+    Returns False if file or filetype is invalid or not in existence.
+    """
+
+    # get the filename
+    filename = args.upload[0]
+
+    # validate file name/path
+    validate_file(filename)
+
+    # print success message
+    print("%s deleted successfully" %filename)
+
+# def show_path(args):
+#     """
+#     Returns path of the file entered.
+#     Returns False if path of the file does not exist.
+#     """
+
+#     # get the filename
+#     file = args.path[0]
+#     # print(file)
 
 
-    filepath = Path(__file__)
-    return print(filepath)
+#     filepath = Path(__file__)
+#     return print(filepath)
 
 def main():
     """
-    
+    Argument function controller
     """
     parser = argparse.ArgumentParser(description="A personal cloud storage cli application")
 
@@ -85,9 +146,18 @@ def main():
     parser.add_argument("-det", "--details", type=str, nargs='*',
                         metavar="delete", help="Delete files from the cloud")
     
-    parser.add_argument("-p", "--path", type=str, nargs=1,
-                        metavar="filepath", default=None,
-                        help="Shows file path")
+    # parser.add_argument("-p", "--path", type=str, nargs=1,
+    #                     metavar="filepath", default=None,
+    #                     help="Shows file path")
     
+    
+    # parse args from STDIN
+    args = parser.parse_args()
 
-    # parser.add_argument("")
+    # call the functions depending on the type of arg
+    if args.upload != None:
+        upload(args)
+
+if __name__ == "__main__":
+    # calling the main fucntion
+    main()
