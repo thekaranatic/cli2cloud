@@ -279,7 +279,7 @@ dict_file_formats = {
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #formated the list below 
-list_file_formats = [
+list_fileformats = [
     '.jpg',
     '.png',
     '.gif',
