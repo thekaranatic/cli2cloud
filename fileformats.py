@@ -1,6 +1,9 @@
-#python dictionaries containing file formats as keys and their description as values
+# USE THE DICTIONARY 'dict_fileformats' as reference to file formats and their extensions
 
-dict_file_formats = {
+# dictionary below contains file formats(extensions) as keys and their description as values
+dict_fileformats = {
+
+    # IMAGE FILE EXTENSIONS
     ".jpg": "JPEG image file",
     ".png": "Portable Network Graphics file",
     ".gif": "Graphics Interchange Format file",
@@ -13,7 +16,7 @@ dict_file_formats = {
     ".pdf": "Portable Document Format file",
     ".ICO" : "Icon File",
     ".WebP" : "WebP Image",
-    ".HEIC/HEIF" : "High Efficiency Image Format",
+    ".HEIC/HEIF" : "High Efficiency Image Format", # this extension is split in two in the list 'list_fileformats' below
     ".JP2" : "JPEG 2000 Image",
     ".PBM" : "Portable Bitmap Image",
     ".PGM" : "Portable Graymap Image",
@@ -21,6 +24,7 @@ dict_file_formats = {
     ".XBM" : "X BitMap Image",
     ".WBMP" : "Wireless Bitmap Image",
 
+    # VIDEO FILE EXTENSIONS
     ".mp4": "MPEG:4 video file",
     ".avi": "Audio Video Interleave file",
     ".mov": "QuickTime video file",
@@ -42,6 +46,7 @@ dict_file_formats = {
     ".MXF" : "Material Exchange Format",
     ".AMV" : "Anime Music Video",
 
+    # AUDIO FILE EXTENSIONS
     "MP3" : "MPEG Audio Layer:3",
     "WAV" : "Waveform Audio File Format",
     "FLAC" : "Free Lossless Audio Codec",
@@ -113,6 +118,7 @@ dict_file_formats = {
     "WVE" : "Wondershare Filmora Project File",
     "MPC8" : "Musepack SV8 Audio File",
 
+    # TEXT FILE EXTENSIONS
     "TXT" : "Plain Text File",
     "CSV" : "Comma - Separated Values",
     "XML" : "Extensible Markup Language",
@@ -124,6 +130,7 @@ dict_file_formats = {
     "EPUB" : "Electronic Publication",
     "Markdown" : "Markdown Text Format",
 
+    # 'DEVELOPER' FILE EXTENSIONS
     "EXE": "Executable File",
     "DLL": "Dynamic Link Library",
     "SYS": "System File",
@@ -175,6 +182,7 @@ dict_file_formats = {
     "DMG": "macOS Disk Image",
     "ISO": "Disk Image File",
 
+    # SYSTEM FILE EXTENSIONS
     "DLL": "Dynamic Link Library",
     "SYS": "System File",
     "EXE": "Executable File",
@@ -226,6 +234,7 @@ dict_file_formats = {
     "CUR": "Cursor Image File",
     "SYS": "Kernel System File",
 
+    # ADOBE FILE EXTENSIONS 
     "PSD": "Adobe Photoshop Document",
     "PSB": "Adobe Photoshop Big Document",
     "TIFF": "Tagged Image File Format",
@@ -252,6 +261,7 @@ dict_file_formats = {
     "AIFF": "Audio Interchange File Format",
     "FLAC": "Free Lossless Audio Codec",
 
+    # MSOFFICE/OFFICE 365 FILE EXTENSIONS
     "DOC": "Word Document",
     "DOCX": "Word Open XML Document",
     "DOT": "Word Document Template",
@@ -276,9 +286,7 @@ dict_file_formats = {
     "ONE": "OneNote Document"
 }
 
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-#formated the list below 
+# this list to be used in the programs
 list_fileformats = [
     '.jpg',
     '.png',
@@ -530,26 +538,3 @@ list_fileformats = [
     '.one'
 ]
 
-
-
-
-# video_dictionary = {
-# }
-
-# audio_dictionay = { 
-# }
-
-# text_dictionary = {   
-# }
-
-# file_extensions = { 
-# }
-
-# system_file_formats = {
-# }
-
-# adobe_file_formats = {
-# }
-
-# microsoft_office_formats = {
-# }
