@@ -287,7 +287,7 @@ dict_fileformats = {
 }
 
 # this tuple to be used in the programs
-tuple_fileformats = [
+tuple_fileformats = (
     '.jpg',
     '.png',
     '.gif',
@@ -536,5 +536,5 @@ tuple_fileformats = [
     '.pst',
     '.pub',
     '.one'
-]
+)
 
