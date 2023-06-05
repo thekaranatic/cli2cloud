@@ -1,17 +1,17 @@
 # import standard 'os' & 'pathlib' module to perform file operations 
 # import third-party 'argparse' module to handle parsing/passing of arguments through CLI
+# import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
+
 import os
 from pathlib import Path
 
 import argparse
 
-import fileformats as ext
+from fileformats import tuple_fileformats as ext
 
 # the messages below will be used relatively to prompt that there is an error with files
-INVALID_FILETYPE_MSG = "Error: Invalid file format. '%s' must be '.txt' file."
-# INVALID_FILETYPE_MSG = "Error: The file is either invalid or we do not support this file. Please check your file again."
-
-INVALID_PATH_MSG = "Oops. Looks like file path/name is invalid. Path '%s' does not exist."
+INVALID_FILETYPE_MSG = "ERROR: %s is either invalid or we do not support this file. Please re-check %s."
+INVALID_PATH_MSG = "ERROR: Looks like file path/name is invalid. Path '%s' does not exist."
 
 files = ['ada.txt','karan.txt','file.txt']
 
@@ -31,7 +31,7 @@ def validate_file(filename):
 
 def validate_filetype(filename):
     """Validates file type/format and returns in 'bool'"""
-    return filename.endswith('.txt')
+    return filename.endswith(ext)
 
 def validate_filepath(filename):
     """Validates file path in the system and returns in 'bool'"""
@@ -134,6 +134,19 @@ def details(args):
     # validate file name/path
     validate_file(filename)
 
+    # dummy code to represent: details/metadata of a file
+    # prints the file name
+    # prints the length of file name as size of the file ;)
+    print("\n")
+    print("FILE\t\tSIZE")
+    print("-------------\t-------")
+    print(filename + " \t" + str(len(filename)))
+
+# def tuple1():
+#     for t in ext:
+#         print(t)
+    
+#     print(len(ext))
 
 def main():
 
@@ -160,8 +173,8 @@ def main():
     parser.add_argument("-dtl", "--details", type=str, nargs='*',
                         metavar="delete", help="Delete files from the cloud")
     
-    # parser.add_argument("-p", "--path", type=str, nargs=1,
-    #                     metavar="filepath", default=None,
+    # parser.add_argument("-tup", "--tuple", type=str, nargs='*',
+    #                     metavar="tuple", default=None,
     #                     help="Shows file path")
     
     
@@ -179,6 +192,8 @@ def main():
         list_files()
     elif args.details != None:
         details(args)
+    # elif args.tuple != None:
+    #     tuple1()
 
 if __name__ == "__main__":
     # calling the main fucntion
