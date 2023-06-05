@@ -16,7 +16,7 @@ dict_fileformats = {
     ".pdf": "Portable Document Format file",
     ".ICO" : "Icon File",
     ".WebP" : "WebP Image",
-    ".HEIC/HEIF" : "High Efficiency Image Format", # this extension is split in two in the list 'list_fileformats' below
+    ".HEIC/HEIF" : "High Efficiency Image Format", # this extension is split in two in the tuple 'tuple_fileformats' below
     ".JP2" : "JPEG 2000 Image",
     ".PBM" : "Portable Bitmap Image",
     ".PGM" : "Portable Graymap Image",
@@ -286,8 +286,8 @@ dict_fileformats = {
     "ONE": "OneNote Document"
 }
 
-# this list to be used in the programs
-list_fileformats = [
+# this tuple to be used in the programs
+tuple_fileformats = [
     '.jpg',
     '.png',
     '.gif',
