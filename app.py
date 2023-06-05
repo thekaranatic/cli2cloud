@@ -11,7 +11,9 @@ import fileformats as ext
 INVALID_FILETYPE_MSG = "Error: Invalid file format. '%s' must be '.txt' file."
 # INVALID_FILETYPE_MSG = "Error: The file is either invalid or we do not support this file. Please check your file again."
 
-INVALID_PATH_MSG = "Error: Invalid file path/name. Path '%s' does not exist."
+INVALID_PATH_MSG = "Oops. Looks like file path/name is invalid. Path '%s' does not exist."
+
+files = ['ada.txt','karan.txt','file.txt']
 
 def validate_file(filename):
     """
@@ -38,7 +40,8 @@ def validate_filepath(filename):
 def upload(args):
     """
     Uploads the specified file to the cloud.
-    Returns False if file or filetype is invalid or not in existence.
+    Supports only one file currently.
+    Returns msg if file or filetype is invalid or not in existence.
     """
     
     # get the filename
@@ -46,25 +49,47 @@ def upload(args):
 
     # validate file name/path
     validate_file(filename)
-
-    # print success message
-    print("%s uploaded successfully" %filename)
-    return
+    
+    # check if file already exists, if False, upload the specified file and notify user
+    if filename in files:
+        # if True, ask user to whether replace the file else take no action
+        response = input("%s already exists. Would you like to update the file [y/n]?"%filename)
+        if 'y' in response:
+            files.remove(filename)
+            files.append(filename)
+            print("%s updated successfully 💯." %filename)
+            return
+        else:
+            print("Rest free 🙌🏼. No action taken.")
+            return
+    else:
+        files.append(filename)
+        print("Yep there it goes 🚀. %s uploaded successfully." %filename)
+        return
 
 def delete(args):
     """
-    Deletes the specified file from the cloud.
+    Deletes the specified file from the cloud. 
+    Supports only one file currently
     Returns False if file or filetype is invalid or not in existence.
     """
 
     # get the filename
-    filename = args.upload[0]
+    filename = args.delete[0]
 
     # validate file name/path
     validate_file(filename)
 
-    # print success message
-    print("%s deleted successfully" %filename)
+    # check if file already exists, 
+    if filename in files:
+        # if True, delete the file and notify user
+        files.remove(filename)
+        print("Trashed! %s deleted successfully." %filename)
+        return
+    # if False, notify user that file doesnt exist or ask to recheck filename & enter again
+    else:
+        print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
+        return
 
 def download(args):
     """
@@ -73,28 +98,29 @@ def download(args):
     """
 
     # get the filename
-    filename = args.upload[0]
+    filename = args.download[0]
 
     # validate file name/path
     validate_file(filename)
 
-    # print success message
-    print("%s downloaded successfully in path 'x://y/z'" %filename)
+    if filename in files:
+        # if True, download the file and notify user
+        print("Right there! %s downloaded successfully in path 'x://y/z'" %filename)
+        return
+    # if False, notify user that file doesnt exist or ask to recheck filename & enter again
+    else:
+        print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
+        return
 
-def list_files(args):
+def list_files():
     """
     Lists all the file present in the cloud.
     Returns False if file or filetype is invalid or not in existence.
     """
 
-    # get the filename
-    filename = args.upload[0]
-
-    # validate file name/path
-    validate_file(filename)
-
-    # print success message
-    print("%s deleted successfully" %filename)
+    for f in files:
+        print(f)
+    return
 
 def details(args):
     """
@@ -103,35 +129,23 @@ def details(args):
     """
 
     # get the filename
-    filename = args.upload[0]
+    filename = args.details[0]
 
     # validate file name/path
     validate_file(filename)
 
-    # print success message
-    print("%s deleted successfully" %filename)
-
-# def show_path(args):
-#     """
-#     Returns path of the file entered.
-#     Returns False if path of the file does not exist.
-#     """
-
-#     # get the filename
-#     file = args.path[0]
-#     # print(file)
-
-
-#     filepath = Path(__file__)
-#     return print(filepath)
 
 def main():
-    """
-    Argument function controller
-    """
+
     parser = argparse.ArgumentParser(description="A personal cloud storage cli application")
 
-    parser.add_argument("-u", "--upload", type=str, nargs='*',
+    parser.add_argument("-lin", "--login", type=str, nargs='*',
+                        metavar="login", help="Login to your personal cloud")
+    
+    parser.add_argument("-lout", "--lougout", type=str, nargs='*',
+                        metavar="logout", help="Logout from your personal cloud")
+
+    parser.add_argument("-up", "--upload", type=str, nargs='*',
                         metavar="upload", help="Upload files to the cloud")
     
     parser.add_argument("-del", "--delete", type=str, nargs='*',
@@ -140,10 +154,10 @@ def main():
     parser.add_argument("-dwl", "--download", type=str, nargs='*',
                         metavar="download", help="Download files from the cloud")
     
-    parser.add_argument("-ls", "--list", type=str, nargs=1,
+    parser.add_argument("-ls", "--list", type=str, nargs='*',
                         metavar="list", help="List files from the cloud")
     
-    parser.add_argument("-det", "--details", type=str, nargs='*',
+    parser.add_argument("-dtl", "--details", type=str, nargs='*',
                         metavar="delete", help="Delete files from the cloud")
     
     # parser.add_argument("-p", "--path", type=str, nargs=1,
@@ -157,6 +171,14 @@ def main():
     # call the functions depending on the type of arg
     if args.upload != None:
         upload(args)
+    elif args.delete != None:
+        delete(args)
+    elif args.download != None:
+        download(args)
+    elif args.list != None:
+        list_files()
+    elif args.details != None:
+        details(args)
 
 if __name__ == "__main__":
     # calling the main fucntion
