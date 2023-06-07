@@ -15,7 +15,7 @@ from fileformats import tuple_fileformats as ext
 # import appwrite libraries to use their storage bucket services
 from appwrite.client import Client
 from appwrite.services.storage import Storage
-import appwrite.input_file
+from appwrite.input_file import InputFile
 
 
 # the messages below will be used relatively to prompt that there is an error with files
@@ -64,26 +64,30 @@ def upload(args):
     
     # get the filename
     filename = args.upload[0]
+    FILEPATH = InputFile.from_path(filename)
 
     # validate file name/path
     validate_file(filename)
 
-    PATH = Path(__file__)
-    print(PATH)
-    # help(storage.create_file())
+    # PATH = Path(__file__)
+    # print(PATH)
+    # # help(storage.create_file())
 
     client = Client()
     storage = Storage(client)
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-        .set_project('5df5acd0d48c2') # Your project ID
-        .set_key('919c2d18fb5d4...a2ae413da83346ad2') # Your secret API key
+        .set_project('647c49a7e79df168b264') # Your project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # Your secret API key
     )
 
     storage = Storage(client)
 
-    result = storage.create_bucket('[BUCKET_ID]', '[NAME]', )
+    # BUCKET_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))
+    FILE_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))    
+    result = storage.create_file('647f207c336d08d20e1f',FILE_ID,FILEPATH)
+    print(result)
 
     # client.set_endpoint('https://cloud.appwrite.io/v1')
     # client.set_project('647c49a7e79df168b264')
