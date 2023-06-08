@@ -24,6 +24,9 @@ INVALID_PATH_MSG = "ERROR: Looks like file path/name is invalid. Path '%s' does 
 
 files = ['ada.txt','karan.txt','file.txt']
 
+buckets = {}
+files = {}
+
 def validate_file(filename):
     """
     Validates file's type (format) and it's path
@@ -84,7 +87,7 @@ def upload(args):
 
     storage = Storage(client)
 
-    # BUCKET_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))
+    
     FILE_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))    
     result = storage.create_file('647f207c336d08d20e1f',FILE_ID,FILEPATH)
     print(result)
@@ -193,20 +196,35 @@ def new_bucket():
     client = Client()
     storage = Storage(client)
 
+    # project settings
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-        .set_project('647c49a7e79df168b264') # Your project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # Your secret API key
+        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_project('647c49a7e79df168b264') # project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
     )
 
-    storage = Storage(client)
-
-    BUCKET_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))
+    # create a random alphanumeric string for Bucket ID always followed by prefix 'C2CBUCK'
+    BUCKET_ID_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
+    BUCKET_ID = "C2CBUCK" + BUCKET_ID_RAND
     
-    result = storage.create_bucket(BUCKET_ID, 'bucket-1')
-    response = result
-    print(response)
+    # create the bucket and store the response
+    response = storage.create_bucket(BUCKET_ID, 'bucket-2')
+    if response != None:
+        buckets.append(response['$id'])
+        bucket_name = response['name']
+        bucket_created_dt = response['$createdAt']
 
+        fr = open("files.txt","r")
+
+        # for each 
+
+        index_of_T = bucket_created_dt.find('T')
+        index_of_period = bucket_created_dt.index('.')
+
+        bucket_created_date = bucket_created_dt[:index_of_T]
+        bucket_created_time = bucket_created_dt[index_of_T+1:index_of_period-3]
+
+        print("Bucket '{}' created at {} on {}".format(bucket_name, bucket_created_time, bucket_created_date))
 
 def main():
 
