@@ -24,7 +24,7 @@ INVALID_PATH_MSG = "ERROR: Looks like file path/name is invalid. Path '%s' does 
 
 files = ['ada.txt','karan.txt','file.txt']
 
-buckets = {}
+buckets = []
 files = {}
 
 def validate_file(filename):
@@ -72,22 +72,15 @@ def upload(args):
     # validate file name/path
     validate_file(filename)
 
-    # PATH = Path(__file__)
-    # print(PATH)
-    # # help(storage.create_file())
-
     client = Client()
     storage = Storage(client)
 
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # Your API Endpoint
-        .set_project('647c49a7e79df168b264') # Your project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # Your secret API key
+        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_project('647c49a7e79df168b264') # project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
     )
 
-    storage = Storage(client)
-
-    
     FILE_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))    
     result = storage.create_file('647f207c336d08d20e1f',FILE_ID,FILEPATH)
     print(result)
@@ -168,9 +161,19 @@ def list_files():
     Returns False if file or filetype is invalid or not in existence.
     """
 
-    for f in files:
-        print(f)
-    return
+    client = Client()
+
+    (client
+        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_project('647c49a7e79df168b264') # project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+    )
+
+    storage = Storage(client)
+    result = storage.list_files('647f207c336d08d20e1f')
+
+    print(result)
+    
 
 def details(args):
     """
@@ -210,13 +213,12 @@ def new_bucket():
     # create the bucket and store the response
     response = storage.create_bucket(BUCKET_ID, 'bucket-2')
     if response != None:
-        buckets.append(response['$id'])
+        bucket_id = response['$id']
         bucket_name = response['name']
         bucket_created_dt = response['$createdAt']
 
-        fr = open("files.txt","r")
-
-        # for each 
+        br = open("./data/buckets.txt","a")
+        br.write(bucket_id+'\n')
 
         index_of_T = bucket_created_dt.find('T')
         index_of_period = bucket_created_dt.index('.')
