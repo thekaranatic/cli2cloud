@@ -187,28 +187,11 @@ def list_files():
     storage = Storage(client)
     result = storage.list_files('647f207c336d08d20e1f')
 
-    print(result)
-    
+    for file in result["files"]:
+        print(file["name"])
 
-def details(args):
-    """
-    Lists out details/metadata of files in the cloud.
-    Returns False if file or filetype is invalid or not in existence.
-    """
-
-    # get the filename
-    filename = args.details[0]
-
-    # validate file name/path
-    validate_file(filename)
-
-    # dummy code to represent: details/metadata of a file
-    # prints the file name
-    # prints the length of file name as size of the file ;)
-    print("\n")
-    print("FILE\t\tSIZE")
-    print("-------------\t-------")
-    print(filename + " \t" + str(len(filename)))
+    file_count = result["total"]
+    print("\nYou have %s files in your cloud"%file_count)
 
 def new_bucket():
     client = Client()
@@ -270,9 +253,6 @@ def main():
     
     parser.add_argument("-ls", "--list", type=str, nargs='*',
                         metavar="list", help="List files from the cloud")
-    
-    parser.add_argument("-dtl", "--details", type=str, nargs='*',
-                        metavar="delete", help="Delete files from the cloud")
 
     parser.add_argument("-nbuck", "--newbucket", type=str, nargs='*',
                         metavar="newbucket", help="Create new bucket on the cloud")
