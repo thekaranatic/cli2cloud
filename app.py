@@ -16,7 +16,7 @@ from fileformats import tuple_fileformats as ext
 from appwrite.client import Client
 from appwrite.services.storage import Storage
 from appwrite.input_file import InputFile
-from appwrite.services import account
+from appwrite.services.account import Account
 
 
 # the messages below will be used relatively to prompt that there is an error with files
@@ -79,26 +79,6 @@ def get_file_id(filename):
         return FILE_ID
     else:
         return False
-
-def sign_up():
-    """
-    Creates an user account and a bucket for the same user
-    """
-    
-   
-    # create new bucket
-    new_bucket()
-
-def login():
-    username = input("What's your username? ")
-    password = input("What's your password? ")
-
-    print("Hi, %s. You are in!"% username)
-
-    get_bucket_id()
-
-def logout():
-    pass
 
 def upload(args):
     """
@@ -290,17 +270,8 @@ def main():
 
     parser = argparse.ArgumentParser(description="A personal cloud storage cli application")
 
-    parser.add_argument("--signup", type=str, nargs='*',
-                        metavar="signup", help="Create an account")
-    
-    parser.add_argument("--delacc", type=str, nargs='*',
-                        metavar="deleteaccount", help="Delete account")
-
-    parser.add_argument("-lin", "--login", type=str, nargs='*',
-                        metavar="login", help="Login to your personal cloud")
-    
-    parser.add_argument("-lout", "--logout", type=str, nargs='*',
-                        metavar="logout", help="Logout from your personal cloud")
+    parser.add_argument("-newb", "--newbucket", type=str, nargs='*',
+                        metavar="newbucket", help="Create new bucket on the cloud")
 
     parser.add_argument("-up", "--upload", type=str, nargs='*',
                         metavar="upload", help="Upload files to the cloud")
@@ -314,18 +285,26 @@ def main():
     parser.add_argument("-ls", "--list", type=str, nargs='*',
                         metavar="list", help="List files from the cloud")
 
-    parser.add_argument("-nbuck", "--newbucket", type=str, nargs='*',
-                        metavar="newbucket", help="Create new bucket on the cloud")
+    # parser.add_argument("--signup", type=str, nargs='*',
+    #                     metavar="signup", help="Create an account")
+    
+    # parser.add_argument("--delacc", type=str, nargs='*',
+    #                     metavar="deleteaccount", help="Delete account")
+
+    # parser.add_argument("-lin", "--login", type=str, nargs='*',
+    #                     metavar="login", help="Login to your personal cloud")
+    
+    # parser.add_argument("-lout", "--logout", type=str, nargs='*',
+    #                     metavar="logout", help="Logout from your personal cloud")
+    
 
 
     # parse args from STDIN
     args = parser.parse_args()
 
     # call the functions depending on the type of arg
-    if args.login != None:
-        login()
-    elif args.logout != None:
-        logout()
+    if args.newbucket != None:
+        new_bucket()
     elif args.upload != None:
         upload(args)
     elif args.delete != None:
@@ -334,8 +313,7 @@ def main():
         download(args)
     elif args.list != None:
         list_files()
-    elif args.newbucket != None:
-        new_bucket()
+    
 
 if __name__ == "__main__":
     # calling the main fucntion
