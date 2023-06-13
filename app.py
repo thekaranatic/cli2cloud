@@ -14,6 +14,11 @@ from tzlocal import get_localzone
 # import third-party 'argparse' module to handle parsing/passing of arguments through CLI
 import argparse
 
+# to beautify the terminal
+from rich.console import Console
+from rich.table import Table
+from time import sleep
+
 # import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
 from fileformats import tuple_fileformats as ext
 
@@ -114,21 +119,11 @@ def upload(args):
     response = storage.create_file(BUCKET_ID,FILE_ID,FILEPATH)
     
     if response != None:
-        file_id = response['$id']
-        up_file_name = response['name'] #uploaded filename
-        file_uploaded_dt = response['$createdAt']
-
-        index_of_T = file_uploaded_dt.find('T')
-        index_of_period = file_uploaded_dt.index('.')
-
-        file_created_date = file_uploaded_dt[:index_of_T]
-        file_created_time = file_uploaded_dt[index_of_T+1:index_of_period-3]
-
-        print(f"There it goes 🚀. '{filename}' uploaded successfully.\n")
-        
-        list_files()
-
-        return
+        console = Console()
+        with console.status("[blue]Preparing to fly high..", spinner="dots2") as status:
+            sleep(1.5)
+            console.print(f"There it goes 🚀. '{filename}' uploaded successfully.\n", style="green")
+    return
 
 def delete(args):
     """
@@ -153,12 +148,16 @@ def delete(args):
     BUCKET_ID = get_bucket_id()
     FILE_ID = get_file_id(filename)
 
+    console = Console()
+
     if FILE_ID:
         response = storage.delete_file(BUCKET_ID, FILE_ID)  # delete specified file from the bucket
         if response != None:
-            print("In the Trash! File '%s' is no longer in your cloud."%filename)
+            with console.status(f"[green]Deleting {filename} from the cloud.", spinner="dots2") as status:
+                sleep(1.5)
+                console.print("In the Trash! File '%s' is no longer in your cloud."%filename, style="red")
     else:
-        print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
+        console.print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
 
 def download(args):
     """
@@ -185,6 +184,8 @@ def download(args):
     BUCKET_ID = get_bucket_id()
     FILE_ID = get_file_id(filename)
 
+    console = Console()
+
     if FILE_ID:
         response = storage.get_file_download(BUCKET_ID, FILE_ID)  # download specified file from the bucket
         if response is not None:
@@ -201,11 +202,14 @@ def download(args):
             with open(file_path, 'wb') as file:
                 file.write(response)
 
-            print(f"Right there 🛬 '{filename}' is downloaded and saved to: {file_path}")
+
+            with console.status("[blue]Coming down..", spinner="earth") as status:
+                sleep(1)
+                console.print(f"Right there 🛬 '{filename}' is downloaded and saved to: {file_path}")
         else:
-            print(f"🙀 Error occurred: {response.text}")
+            console.print(f"🙀 Error occurred")
     else:
-        print(f"Oops! '{filename}' doesn't exist in your cloud. Try re-checking the filename and enter again.")
+        console.print(f"Oops! '{filename}' doesn't exist in your cloud. Try re-checking the filename and enter again.")
         return
 
 def list_files():
@@ -225,34 +229,53 @@ def list_files():
     storage = Storage(client)
     result = storage.list_files(BUCKET_ID)  # get files from the created bucket
 
+    console = Console()
+
     if result["files"] == []:
         print("\nYour cloud is empty 😐")
     else:
-        print("FILE     \tCREATED       \tTYPE   \t     SIZE (KB)")
-        for file in result["files"]:
+        with console.status("[blue]flying high to the cloud..", spinner="dots2") as status:
+            sleep(1.5)
 
-            # store details of file
-            file_name = file["name"]
-            timestamp = file["$createdAt"]
-            file_type = file["mimeType"]
-            file_size = file["sizeOriginal"]
-
-            # Convert the timestamp to a datetime object
-            datetime_obj = datetime.datetime.fromisoformat(timestamp[:-6])
-
-            # Get the user's local time zone
-            user_timezone = get_localzone()
-
-            # Convert the datetime object to the user's local time zone
-            localized_datetime = datetime_obj.astimezone(user_timezone)
-
-            # Format the localized datetime in a user-friendly format
-            user_friendly_date = localized_datetime.strftime('%B %d, %Y')
-            user_friendly_time = localized_datetime.strftime('%H:%M')
+            status.update(status="[green] Coming down with files", 
+                    spinner="earth")
+            sleep(1.5)
             
-            print(f"{file_name}\t{user_friendly_date}\t{user_friendly_time}\t{file_type}\t{file_size}") # write all files & their quantity to STDOUT 
-        file_count = result["total"]
-        print("\nYou have %s files in your cloud ☁️"%file_count)
+            # table object to create a table
+            table = Table(title="Files in your cloud")
+
+            table.add_column("FILE", style="cyan", no_wrap=False) 
+            table.add_column("CREATED", style="white", no_wrap=False) 
+            table.add_column("TYPE", style="white", no_wrap=False) 
+            table.add_column("SIZE (KB)", style="white", no_wrap=False ) 
+            
+            for file in result["files"]:
+
+                # store details of file
+                file_name = file["name"]
+                timestamp = file["$createdAt"]
+                file_type = file["mimeType"]
+                file_size = file["sizeOriginal"]
+                file_count = result["total"]
+
+                # Convert the timestamp to a datetime object
+                datetime_obj = datetime.datetime.fromisoformat(timestamp[:-6])
+
+                # Get the user's local time zone
+                user_timezone = get_localzone()
+
+                # Convert the datetime object to the user's local time zone
+                localized_datetime = datetime_obj.astimezone(user_timezone)
+
+                # Format the localized datetime in a user-friendly format
+                user_friendly_dtm = localized_datetime.strftime('%B %d, %Y  %H:%M')
+                
+                # print the content in a table
+                table.add_row(file_name,user_friendly_dtm,file_type,str(file_size))
+
+        # print the table
+        console.print(table)
+        console.print("\nYou have %s files in your cloud ☁️\n"%file_count)
             
 def new_bucket():
     client = Client()
@@ -268,8 +291,8 @@ def new_bucket():
     BUCKET_ID_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
     BUCKET_ID = "c2cbuck" + BUCKET_ID_RAND
 
-    BUCKET_NAME_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,16))
-    BUCKET_NAME = "user" + BUCKET_NAME_RAND
+    BUCKET_NAME_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
+    BUCKET_NAME = "bucknam" + BUCKET_NAME_RAND
     
     # create the bucket and store the response
     storage = Storage(client)
@@ -277,20 +300,16 @@ def new_bucket():
 
     if response != None:
         bucket_id = response['$id']
-        bucket_name = response['name']
-        bucket_created_dt = response['$createdAt']
 
-        # write the bucket_id into a file to read it when necessary
+        # write the bucket_id into a file in order to fetch it whenever necessary
         br = open("./data/buckets.txt","w")
         br.write(bucket_id)
 
-        index_of_T = bucket_created_dt.find('T')
-        index_of_period = bucket_created_dt.index('.')
+        console = Console()
+        with console.status("[Creating bucket...]flying high to the cloud..", spinner="dots2") as status:
+            sleep(3)
 
-        bucket_created_date = bucket_created_dt[:index_of_T]
-        bucket_created_time = bucket_created_dt[index_of_T+1:index_of_period-3]
-
-        print("Bucket '{}' created at {} on {}".format(bucket_name, bucket_created_time, bucket_created_date))
+        console.print("Bucket created. You can now start using you cloud. Happy transfering 😃")
 
 def main():
 
