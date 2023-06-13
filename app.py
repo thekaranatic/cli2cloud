@@ -1,15 +1,20 @@
 # import standard 'os' & 'pathlib' module to perform file operations 
-# import third-party 'argparse' module to handle parsing/passing of arguments through CLI
-# import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
-
 import os
+
+# for operations regarding creating dirs, generating rand str
 from pathlib import Path
 import random as rnd
 import secrets
 import string
 
+# To convert a timestamp to the user's local time zone and display it in a user-friendly format
+import datetime
+from tzlocal import get_localzone
+
+# import third-party 'argparse' module to handle parsing/passing of arguments through CLI
 import argparse
 
+# import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
 from fileformats import tuple_fileformats as ext
 
 # import appwrite libraries to use their storage bucket services
@@ -223,9 +228,30 @@ def list_files():
     if result["files"] == []:
         print("\nYour cloud is empty 😐")
     else:
+        print("FILE     \tCREATED       \tTYPE   \t     SIZE (KB)")
         for file in result["files"]:
-            print(file["name"]) # write all files & their quantity to STDOUT 
-            file_count = result["total"]
+
+            # store details of file
+            file_name = file["name"]
+            timestamp = file["$createdAt"]
+            file_type = file["mimeType"]
+            file_size = file["sizeOriginal"]
+
+            # Convert the timestamp to a datetime object
+            datetime_obj = datetime.datetime.fromisoformat(timestamp[:-6])
+
+            # Get the user's local time zone
+            user_timezone = get_localzone()
+
+            # Convert the datetime object to the user's local time zone
+            localized_datetime = datetime_obj.astimezone(user_timezone)
+
+            # Format the localized datetime in a user-friendly format
+            user_friendly_date = localized_datetime.strftime('%B %d, %Y')
+            user_friendly_time = localized_datetime.strftime('%H:%M')
+            
+            print(f"{file_name}\t{user_friendly_date}\t{user_friendly_time}\t{file_type}\t{file_size}") # write all files & their quantity to STDOUT 
+        file_count = result["total"]
         print("\nYou have %s files in your cloud ☁️"%file_count)
             
 def new_bucket():
@@ -297,7 +323,6 @@ def main():
     # parser.add_argument("-lout", "--logout", type=str, nargs='*',
     #                     metavar="logout", help="Logout from your personal cloud")
     
-
 
     # parse args from STDIN
     args = parser.parse_args()
