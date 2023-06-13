@@ -16,16 +16,12 @@ from fileformats import tuple_fileformats as ext
 from appwrite.client import Client
 from appwrite.services.storage import Storage
 from appwrite.input_file import InputFile
+from appwrite.services import account
 
 
 # the messages below will be used relatively to prompt that there is an error with files
-INVALID_FILETYPE_MSG = "ERROR: %s is either invalid or we do not support this file. Please re-check the file."
-INVALID_PATH_MSG = "ERROR: Looks like file path/name is invalid. Path '%s' does not exist."
-
-files = ['ada.txt','karan.txt','file.txt']
-
-buckets = []
-files = {}
+INVALID_FILETYPE_MSG = "🙀 ERROR: %s is either invalid or we do not support this file. Please re-check the file."
+INVALID_PATH_MSG = "🙀 ERROR: Looks like file path/name is invalid. '%s' does not exist."
 
 def validate_file(filename):
     """
@@ -59,6 +55,7 @@ def sign_up():
     Creates an user account and a bucket for the same user
     """
 
+   
     # create new bucket
     new_bucket()
 
@@ -82,19 +79,20 @@ def upload(args):
     
     # get the filename
     filename = args.upload[0]
-    FILEPATH = InputFile.from_path(filename)
+    FILEPATH = InputFile.from_path(filename) # get path of file (using appwrite's functions)
 
     # validate file name/path
     validate_file(filename)
 
     client = Client()
-    storage = Storage(client)
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
         .set_project('647c49a7e79df168b264') # project ID
         .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
     )
+
+    storage = Storage(client)
 
     FILE_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))    
     result = storage.create_file('647f207c336d08d20e1f',FILE_ID,FILEPATH)
@@ -173,7 +171,6 @@ def download(args):
 def list_files():
     """
     Lists all the file present in the cloud.
-    Returns False if file or filetype is invalid or not in existence.
     """
 
     client = Client()
@@ -184,15 +181,18 @@ def list_files():
     )
 
     BUCKET_ID = get_bucket_id()
+
     storage = Storage(client)
-    result = storage.list_files('647f207c336d08d20e1f')
+    result = storage.list_files('647f207c336d08d20e1f')  # get files from the created bucket
 
-    for file in result["files"]:
-        print(file["name"])
-
-    file_count = result["total"]
-    print("\nYou have %s files in your cloud"%file_count)
-
+    if result["files"] == []:
+        print("\nYour cloud is empty 😐")
+    else:
+        for file in result["files"]:
+            print(file["name"]) # write all files & their quantity to STDOUT 
+            file_count = result["total"]
+        print("\nYou have %s files in your cloud 😸"%file_count)
+            
 def new_bucket():
     client = Client()
 
@@ -205,16 +205,21 @@ def new_bucket():
 
     # create a random alphanumeric string for Bucket ID always followed by prefix 'C2CBUCK'
     BUCKET_ID_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
-    BUCKET_ID = "C2CBUCK" + BUCKET_ID_RAND
+    BUCKET_ID = "c2cbuck" + BUCKET_ID_RAND
+
+    BUCKET_NAME_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,16))
+    BUCKET_NAME = "user" + BUCKET_NAME_RAND
     
     # create the bucket and store the response
     storage = Storage(client)
-    response = storage.create_bucket(BUCKET_ID, '4_30PM')
+    response = storage.create_bucket(BUCKET_ID, BUCKET_NAME) # create bucket
+
     if response != None:
         bucket_id = response['$id']
         bucket_name = response['name']
         bucket_created_dt = response['$createdAt']
 
+        # write the bucket_id into a file to read it when necessary
         br = open("./data/buckets.txt","w")
         br.write(bucket_id)
 
@@ -274,8 +279,6 @@ def main():
         download(args)
     elif args.list != None:
         list_files()
-    elif args.details != None:
-        details(args)
     elif args.newbucket != None:
         new_bucket()
 
