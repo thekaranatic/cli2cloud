@@ -46,15 +46,45 @@ def validate_filepath(filename):
     return os.path.exists(filename)
 
 def get_bucket_id():
+    """ Reads bucket_id (str) from a file and returns the same (str)"""
     data = open("./data/buckets.txt","r")
     bucket_id = data.read()
     return bucket_id
+
+def get_file_id(filename):
+    """ Reads file_id (str) from response after a request and returns the same (str)"""
+
+    client = Client()
+
+    (client
+        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_project('647c49a7e79df168b264') # project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+    )
+
+    storage = Storage(client)
+
+    BUCKET_ID = get_bucket_id() # get bucket id from the file './data/buckets.txt'
+
+    result = storage.list_files(BUCKET_ID)  # get files from the created bucket
+
+    FILE_ID = None # set flag to None
+
+    for file_info in result["files"]:
+        if file_info["name"] == filename:
+            FILE_ID = file_info["$id"]  # store file_id of the specified file that exists in the cloud 
+            break
+
+    if FILE_ID is not None:
+        return FILE_ID
+    else:
+        return False
 
 def sign_up():
     """
     Creates an user account and a bucket for the same user
     """
-
+    
    
     # create new bucket
     new_bucket()
@@ -68,7 +98,7 @@ def login():
     get_bucket_id()
 
 def logout():
-    print("You are logged out.")   
+    pass
 
 def upload(args):
     """
@@ -94,34 +124,26 @@ def upload(args):
 
     storage = Storage(client)
 
+    BUCKET_ID = get_bucket_id()
     FILE_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))    
-    result = storage.create_file('647f207c336d08d20e1f',FILE_ID,FILEPATH)
-    print(result)
-
-    # client.set_endpoint('https://cloud.appwrite.io/v1')
-    # client.set_project('647c49a7e79df168b264')
-    # client.set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93')
-
-    # FILE_ID = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,20))    
-    # result = storage.create_file('647f207c336d08d20e1f',FILE_ID,filename)
-    # print(result)
+    response = storage.create_file(BUCKET_ID,FILE_ID,FILEPATH)
     
-    # check if file already exists, if False, upload the specified file and notify user
-    # if filename in files:
-    #     # if True, ask user to whether replace the file else take no action
-    #     response = input("%s already exists. Would you like to update the file [y/n]?"%filename)
-    #     if 'y' in response:
-    #         files.remove(filename)
-    #         files.append(filename)
-    #         print("%s updated successfully 💯." %filename)
-    #         return
-    #     else:
-    #         print("Rest free 🙌🏼. No action taken.")
-    #         return
-    # else:
-    #     files.append(filename)
-    #     print("Yep there it goes 🚀. %s uploaded successfully." %filename)
-    #     return
+    if response != None:
+        file_id = response['$id']
+        up_file_name = response['name'] #uploaded filename
+        file_uploaded_dt = response['$createdAt']
+
+        index_of_T = file_uploaded_dt.find('T')
+        index_of_period = file_uploaded_dt.index('.')
+
+        file_created_date = file_uploaded_dt[:index_of_T]
+        file_created_time = file_uploaded_dt[index_of_T+1:index_of_period-3]
+
+        print(f"There it goes 🚀. '{filename}' uploaded successfully.\n")
+        
+        list_files()
+
+        return
 
 def delete(args):
     """
@@ -133,19 +155,25 @@ def delete(args):
     # get the filename
     filename = args.delete[0]
 
-    # validate file name/path
-    validate_file(filename)
+    client = Client()
 
-    # check if file already exists, 
-    if filename in files:
-        # if True, delete the file and notify user
-        files.remove(filename)
-        print("Trashed! %s deleted successfully." %filename)
-        return
-    # if False, notify user that file doesnt exist or ask to recheck filename & enter again
+    (client
+        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_project('647c49a7e79df168b264') # project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+    )
+
+    storage = Storage(client)
+
+    BUCKET_ID = get_bucket_id()
+    FILE_ID = get_file_id(filename)
+
+    if FILE_ID:
+        response = storage.delete_file(BUCKET_ID, FILE_ID)  # delete specified file from the bucket
+        if response != None:
+            print("In the Trash! File '%s' is no longer in your cloud."%filename)
     else:
         print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
-        return
 
 def download(args):
     """
@@ -159,13 +187,40 @@ def download(args):
     # validate file name/path
     validate_file(filename)
 
-    if filename in files:
-        # if True, download the file and notify user
-        print("Right there! %s downloaded successfully in path 'x://y/z'" %filename)
-        return
-    # if False, notify user that file doesnt exist or ask to recheck filename & enter again
+    client = Client()
+
+    (client
+        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_project('647c49a7e79df168b264') # project ID
+        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+    )
+
+    storage = Storage(client)
+
+    BUCKET_ID = get_bucket_id()
+    FILE_ID = get_file_id(filename)
+
+    if FILE_ID:
+        response = storage.get_file_download(BUCKET_ID, FILE_ID)  # download specified file from the bucket
+        if response is not None:
+            # create destination directory
+            path = os.getcwd()
+            PATH = os.path.join(path,"downloads")
+            os.makedirs(PATH, exist_ok=True)
+
+            # extract the file name from response headers
+            file_name = FILE_ID.split('/')[-1]
+
+            # save the file to dest dir
+            file_path = os.path.join(PATH, filename)
+            with open(file_path, 'wb') as file:
+                file.write(response)
+
+            print(f"Right there 🛬 '{filename}' is downloaded and saved to: {file_path}")
+        else:
+            print(f"🙀 Error occurred: {response.text}")
     else:
-        print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
+        print(f"Oops! '{filename}' doesn't exist in your cloud. Try re-checking the filename and enter again.")
         return
 
 def list_files():
@@ -183,7 +238,7 @@ def list_files():
     BUCKET_ID = get_bucket_id()
 
     storage = Storage(client)
-    result = storage.list_files('647f207c336d08d20e1f')  # get files from the created bucket
+    result = storage.list_files(BUCKET_ID)  # get files from the created bucket
 
     if result["files"] == []:
         print("\nYour cloud is empty 😐")
@@ -191,7 +246,7 @@ def list_files():
         for file in result["files"]:
             print(file["name"]) # write all files & their quantity to STDOUT 
             file_count = result["total"]
-        print("\nYou have %s files in your cloud 😸"%file_count)
+        print("\nYou have %s files in your cloud ☁️"%file_count)
             
 def new_bucket():
     client = Client()
