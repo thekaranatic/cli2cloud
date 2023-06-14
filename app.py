@@ -47,19 +47,23 @@ def validate_file(filename):
         quit()
     return
 
+
 def validate_filetype(filename):
     """Validates file type/format and returns in 'bool'"""
     return filename.endswith(ext)
 
+
 def validate_filepath(filename):
     """Validates file path in the system and returns in 'bool'"""
     return os.path.exists(filename)
+
 
 def get_bucket_id():
     """ Reads bucket_id (str) from a file and returns the same (str)"""
     data = open("./data/buckets.txt","r")
     bucket_id = data.read()
     return bucket_id
+
 
 def get_file_id(filename):
     """ Reads file_id (str) from response after a request and returns the same (str)"""
@@ -89,6 +93,7 @@ def get_file_id(filename):
         return FILE_ID
     else:
         return False
+
 
 def upload(args):
     """
@@ -125,6 +130,7 @@ def upload(args):
             console.print(f"There it goes 🚀. '{filename}' uploaded successfully.\n", style="green")
     return
 
+
 def delete(args):
     """
     Deletes the specified file from the cloud. 
@@ -158,6 +164,7 @@ def delete(args):
                 console.print("In the Trash! File '%s' is no longer in your cloud."%filename, style="red")
     else:
         console.print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename, style="blue")
+
 
 def download(args):
     """
@@ -211,6 +218,7 @@ def download(args):
     else:
         console.print(f"Oops! '{filename}' doesn't exist in your cloud. Try re-checking the filename and enter again.")
         return
+
 
 def list_files():
     """
@@ -277,7 +285,9 @@ def list_files():
         console.print(table)
         console.print("\nYou have %s files in your cloud ☁️\n"%file_count)
             
+
 def new_bucket():
+    """Creates a new bucket"""
     client = Client()
 
     # project settings
@@ -292,7 +302,7 @@ def new_bucket():
     BUCKET_ID = "c2cbuck" + BUCKET_ID_RAND
 
     BUCKET_NAME_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
-    BUCKET_NAME = "bucknam" + BUCKET_NAME_RAND
+    BUCKET_NAME = "buckname" + BUCKET_NAME_RAND
     
     # create the bucket and store the response
     storage = Storage(client)
@@ -306,10 +316,40 @@ def new_bucket():
         br.write(bucket_id)
 
         console = Console()
-        with console.status("[Creating bucket...]flying high to the cloud..", spinner="dots2") as status:
+        with console.status("[green]Creating bucket...", spinner="dots2") as status:
             sleep(3)
 
         console.print("Bucket created. You can now start using you cloud. Happy transfering 😃")
+
+
+def del_bucket():
+    """ Deletes the created bucket """
+    console = Console()
+    res = input("⚠️ You will lose all your files after this action. Proceed [y/n]? ")
+    if res == 'y':
+        client = Client()
+
+        # project settings
+        (client
+            .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+            .set_project('647c49a7e79df168b264') # project ID
+            .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        )
+
+        BUCKET_ID = get_bucket_id()
+        
+        # create the bucket and store the response
+        storage = Storage(client)
+        response = storage.delete_bucket(BUCKET_ID) # delete bucket
+
+        if response != None:
+            with console.status("[red]Deleting bucket...", spinner="dots2") as status:
+                sleep(3)
+
+            console.print("Poofff! Bucket deleted successfully.", style="green")
+    else:
+        console.print("Rest free 🙌🏼. No action taken", style="blue")
+    
 
 def main():
     parser = argparse.ArgumentParser(description="CLI2CLOUD is a powerful Python CLI app for effortless file management tasks such as uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease", 
@@ -317,6 +357,9 @@ def main():
 
     parser.add_argument("-newb", "--newbucket", type=str, nargs='*',
                         metavar="newbucket", help="Create new bucket on the cloud")
+
+    parser.add_argument("-delb", "--deletebucket", type=str, nargs='*',
+                        metavar="deletebucket", help="Delete bucket from the cloud")
 
     parser.add_argument("-up", "--upload", type=str, nargs='*',
                         metavar="upload", help="Upload files to the cloud")
@@ -349,6 +392,8 @@ def main():
     # call the functions depending on the type of arg
     if args.newbucket != None:
         new_bucket()
+    elif args.deletebucket != None:
+        del_bucket()
     elif args.upload != None:
         upload(args)
     elif args.delete != None:
