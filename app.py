@@ -157,7 +157,7 @@ def delete(args):
                 sleep(1.5)
                 console.print("In the Trash! File '%s' is no longer in your cloud."%filename, style="red")
     else:
-        console.print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename)
+        console.print("%s doesn't exist in your cloud. Try re-checking the filename and enter again."%filename, style="blue")
 
 def download(args):
     """
@@ -205,7 +205,7 @@ def download(args):
 
             with console.status("[blue]Coming down..", spinner="earth") as status:
                 sleep(1)
-                console.print(f"Right there 🛬 '{filename}' is downloaded and saved to: {file_path}")
+                console.print(f"Right there 🛬 '{filename}' is downloaded and saved to: {file_path}", style="green")
         else:
             console.print(f"🙀 Error occurred")
     else:
@@ -312,8 +312,8 @@ def new_bucket():
         console.print("Bucket created. You can now start using you cloud. Happy transfering 😃")
 
 def main():
-
-    parser = argparse.ArgumentParser(description="A personal cloud storage cli application")
+    parser = argparse.ArgumentParser(description="CLI2CLOUD is a powerful Python CLI app for effortless file management tasks such as uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease", 
+                                     epilog="Made with ❤️ by https://github.com/thekaranatic")
 
     parser.add_argument("-newb", "--newbucket", type=str, nargs='*',
                         metavar="newbucket", help="Create new bucket on the cloud")
