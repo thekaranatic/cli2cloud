@@ -72,4 +72,4 @@ Please note that you may need to modify the commands based on your operating sys
 Please note that you may need to modify the commands based on your operating system and Python environment.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/thekaranaitc/cli2cloud/blob/main/LICENSE).
+This project is licensed under the [MIT License][(https://github.com/thekaranaitc/cli2cloud/blob/main/LICENSE)](https://github.com/thekaranatic/cli2cloud/blob/main/LICENSE).
