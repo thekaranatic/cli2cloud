@@ -2,7 +2,7 @@
 
 This is a Python-based CLI app that provides easy and efficient file management capabilities, including uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease
 
-## Usage
+## Commands
 
 The app facilitates following commands
 
@@ -27,7 +27,7 @@ The app facilitates following commands
 `-ls` `--list`   :   List files from the cloud
 
 
-
+## Usage
 1. Create a bucket first
    `python  app.py -newb`
 
