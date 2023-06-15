@@ -1,12 +1,47 @@
-__author__ = "Karan Kakati"
-__copyright__ = "Copyright 2023, Karan Kakati"
-__credits__ = ["Karan Kakati", "Darshan Habib"]
-__license__ = "MIT"
-__version__ = "0.9.9"
-__maintainer__ = "Karan Kakati"
-__email__ = "karanpk@duck.com"
-__status__ = "Production"
+"""
+cli2cloud
 
+This is a command-line interface (CLI) application written in Python for easy and efficient file management tasks. 
+It provides functionality to upload, delete, download, and list files effortlessly.
+!!!Note that you clone this repository to a directory where you would like to manage files from. 
+
+Usage:
+    python  app.py -newb
+        Create a bucket on the cloud
+
+    python  app.py -delb
+        Delete a bucket from the cloud
+
+    python  app.py -up <filename> or <file_path>
+        Upload file to the cloud
+
+    python  app.py -del <filename>
+        Delete file from the cloud.
+
+    python  app.py --dwl <filename>
+       Download files from the cloud.
+
+    python  app.py -ls <path>
+       List files from the cloud
+
+Prerequisites:
+- Python 3.x
+- Required Python packages (install using `pip`):
+    - requests
+    - argparse
+
+Installation:
+1. Clone the repository IN A DIRECTORY OF FILES YOU WOULD LIKE TO MANAGE (upload, delete, etc.):
+    git clone https://github.com/thekaranatic/cli2cloud.git
+
+2. Navigate to the project directory:
+    cd cli2cloud
+
+3. Install the required packages:
+    pip install -r requirements.txt
+
+Feel free to contribute and make this app even better!
+"""
 
 # import standard 'os' & 'pathlib' module to perform file operations 
 import os
@@ -29,14 +64,24 @@ from rich.console import Console
 from rich.table import Table
 from time import sleep
 
-# import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
-from fileformats import tuple_fileformats as ext
-
 # import appwrite libraries to use their storage bucket services
 from appwrite.client import Client
 from appwrite.services.storage import Storage
 from appwrite.input_file import InputFile
 from appwrite.services.account import Account
+
+# import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
+from fileformats import tuple_fileformats as ext
+
+__author__ = "Karan Kakati"
+__copyright__ = "Copyright 2023, Karan Kakati"
+__credits__ = ["Karan Kakati"]
+__license__ = "MIT"
+__version__ = "0.9.9"
+__maintainer__ = "Karan Kakati"
+__email__ = "karanpk@duck.com"
+__status__ = "Production"
+
 
 
 # the messages below will be used relatively to prompt that there is an error with files
