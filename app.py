@@ -72,8 +72,8 @@ def get_file_id(filename):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('647c49a7e79df168b264') # project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        .set_project('') # project ID
+        .set_key(' ') # secret API key
     )
 
     storage = Storage(client)
@@ -113,8 +113,8 @@ def upload(args):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('647c49a7e79df168b264') # project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        .set_project('') # project ID
+        .set_key(' ') # secret API key
     )
 
     storage = Storage(client)
@@ -145,8 +145,8 @@ def delete(args):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('647c49a7e79df168b264') # project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        .set_project(' ') # project ID
+        .set_key(' ') # secret API key
     )
 
     storage = Storage(client)
@@ -182,8 +182,8 @@ def download(args):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('647c49a7e79df168b264') # project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        .set_project(' ') # project ID
+        .set_key(' ') # secret API key
     )
 
     storage = Storage(client)
@@ -228,8 +228,8 @@ def list_files():
     client = Client()
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('647c49a7e79df168b264') # project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        .set_project(' ') # project ID
+        .set_key(' ') # secret API key
     )
 
     BUCKET_ID = get_bucket_id()
@@ -293,8 +293,8 @@ def new_bucket():
     # project settings
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('647c49a7e79df168b264') # project ID
-        .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+        .set_project(' ') # project ID
+        .set_key(' ') # secret API key
     )
 
     # create a random alphanumeric string for Bucket ID always followed by prefix 'C2CBUCK'
@@ -332,8 +332,8 @@ def del_bucket():
         # project settings
         (client
             .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-            .set_project('647c49a7e79df168b264') # project ID
-            .set_key('7e62fbf81b373436fc3b6a7b798ba14a8fc6b2e7dcf1ea7b865b96ef10cc2ef2d540e883bff4515fb68f09b7fab128fd2278c63b0f99a42a60ea48330819302f85bf96494a7033f2915b8198993384cf25270460c8aa27d70dbf84874cc30b5408bd7e07c52c7e9d6ecfc499cfd7de6ed6016abbe0b5386bd19aef5716409f93') # secret API key
+            .set_project(' ') # project ID
+            .set_key(' ') # secret API key
         )
 
         BUCKET_ID = get_bucket_id()
