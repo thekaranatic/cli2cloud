@@ -7,12 +7,26 @@ This is a Python-based CLI app that provides easy and efficient file management 
 The app facilitates following commands
 
 `-h` `--help`   :   About application
+
+
 `-newb` `--newbucket`   :   Create new bucket on the cloud
+
+
 `-delb` `--deletebucket`   :   Delete bucket from the cloud
+
+
 `-up` `--upload`   :   Upload files to the cloud
+
+
 `-del` `--delete`   :   Delete files from the cloud
+
+
 `-dwl` `--download`   :   Download files from the cloud
+
+
 `-ls` `--list`   :   List files from the cloud
+
+
 
 1. Create a bucket first
    `python  app.py -newb`
