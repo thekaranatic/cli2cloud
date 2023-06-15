@@ -1,3 +1,13 @@
+__author__ = "Karan Kakati"
+__copyright__ = "Copyright 2023, Karan Kakati"
+__credits__ = ["Karan Kakati", "Darshan Habib"]
+__license__ = "MIT"
+__version__ = "0.9.9"
+__maintainer__ = "Karan Kakati"
+__email__ = "karanpk@duck.com"
+__status__ = "Production"
+
+
 # import standard 'os' & 'pathlib' module to perform file operations 
 import os
 
