@@ -276,7 +276,7 @@ def list_files():
                 localized_datetime = datetime_obj.astimezone(user_timezone)
 
                 # Format the localized datetime in a user-friendly format
-                user_friendly_dtm = localized_datetime.strftime('%B %d, %Y  %H:%M')
+                user_friendly_dtm = localized_datetime.strftime('%B %d, %Y')
                 
                 # print the content in a table
                 table.add_row(file_name,user_friendly_dtm,file_type,str(file_size))
