@@ -40,6 +40,8 @@ Installation:
 3. Install the required packages:
     pip install -r requirements.txt
 
+4. Start managing your files!
+
 Feel free to contribute and make this app even better!
 """
 
@@ -72,6 +74,7 @@ from appwrite.services.account import Account
 
 # import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
 from fileformats import tuple_fileformats as ext
+from env_var import API_KEY, PROJECT_ID
 
 __author__ = "Karan Kakati"
 __copyright__ = "Copyright 2023, Karan Kakati"
@@ -127,8 +130,8 @@ def get_file_id(filename):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('') # project ID
-        .set_key(' ') # secret API key
+        .set_project(PROJECT_ID) # project ID
+        .set_key(API_KEY) # secret API key
     )
 
     storage = Storage(client)
@@ -168,8 +171,8 @@ def upload(args):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project('') # project ID
-        .set_key(' ') # secret API key
+        .set_project(PROJECT_ID) # project ID
+        .set_key(API_KEY) # secret API key
     )
 
     storage = Storage(client)
@@ -200,8 +203,8 @@ def delete(args):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project(' ') # project ID
-        .set_key(' ') # secret API key
+        .set_project(PROJECT_ID) # project ID
+        .set_key(API_KEY) # secret API key
     )
 
     storage = Storage(client)
@@ -237,8 +240,8 @@ def download(args):
 
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project(' ') # project ID
-        .set_key(' ') # secret API key
+        .set_project(PROJECT_ID) # project ID
+        .set_key(API_KEY) # secret API key
     )
 
     storage = Storage(client)
@@ -283,8 +286,8 @@ def list_files():
     client = Client()
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project(' ') # project ID
-        .set_key(' ') # secret API key
+        .set_project(PROJECT_ID) # project ID
+        .set_key(API_KEY) # secret API key
     )
 
     BUCKET_ID = get_bucket_id()
@@ -348,8 +351,8 @@ def new_bucket():
     # project settings
     (client
         .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-        .set_project(' ') # project ID
-        .set_key(' ') # secret API key
+        .set_project(PROJECT_ID) # project ID
+        .set_key(API_KEY) # secret API key
     )
 
     # create a random alphanumeric string for Bucket ID always followed by prefix 'C2CBUCK'
@@ -387,8 +390,8 @@ def del_bucket():
         # project settings
         (client
             .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
-            .set_project(' ') # project ID
-            .set_key(' ') # secret API key
+            .set_project(PROJECT_ID) # project ID
+            .set_key(API_KEY) # secret API key
         )
 
         BUCKET_ID = get_bucket_id()
@@ -407,7 +410,7 @@ def del_bucket():
     
 
 def main():
-    parser = argparse.ArgumentParser(description="CLI2CLOUD is a powerful Python CLI app for effortless file management tasks such as uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease", 
+    parser = argparse.ArgumentParser(description="CLI2CLOUD is a Python CLI app for effortless file management tasks such as uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease", 
                                      epilog="Made with ❤️ by https://github.com/thekaranatic")
 
     parser.add_argument("-newb", "--newbucket", type=str, nargs='*',
