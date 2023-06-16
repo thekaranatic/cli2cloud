@@ -1,6 +1,25 @@
+[![thekaranatic - cli2cloud](https://img.shields.io/static/v1?label=thekaranatic&message=cli2cloud&color=blue&logo=github)](https://github.com/thekaranatic/cli2cloud "Go to GitHub repo")
+[![stars - cli2cloud](https://img.shields.io/github/stars/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud)
+[![forks - cli2cloud](https://img.shields.io/github/forks/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud)
+
+[![Generic badge](https://img.shields.io/badge/version-0.9.9-yellow.svg)](https://shields.io/)
+[![wakatime](https://wakatime.com/badge/user/bf88ca6a-7335-436d-bf81-82f32bc434c2/project/b551b3c7-6b8c-4b04-82d4-6e27488c3113.svg)](https://wakatime.com/badge/user/bf88ca6a-7335-436d-bf81-82f32bc434c2/project/b551b3c7-6b8c-4b04-82d4-6e27488c3113)
+
+[![made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
+![built with appwrite](https://img.shields.io/badge/Appwrite-F02E65?style=for-the-badge&logo=Appwrite&logoColor=black)
+
+[![GitHub release](https://img.shields.io/github/release/thekaranatic/cli2cloud?include_prereleases=&sort=semver&color=blue)](https://github.com/thekaranatic/cli2cloud/releases/)
+[![License](https://img.shields.io/badge/License-MIT-blue)](#license)
+
+Released under [MIT](/LICENSE) by [@thekaranatic](https://github.com/thekaranatic).
+
+
+
+
+![cli2cloud logo cover](https://github.com/thekaranatic/cli2cloud/blob/main/cli2cloud-logo-final-v2.png)
 # cli2cloud
 
-This is a Python-based CLI app that provides easy and efficient file management capabilities, including uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease
+This is a Python-based CLI app that provides easy and efficient file management capabilities, including uploading, deleting, downloading, and listing files over the cloud. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease
 
 ## Commands
 
@@ -54,8 +73,8 @@ Please note that you may need to modify the commands based on your operating sys
 ## Prerequisites:
 - Python 3.x
 - Required Python packages (install using `pip`):
-    - requests
     - argparse
+    - rich
 
 ## Installation:
 1. Clone the repository IN A DIRECTORY OF FILES YOU WOULD LIKE TO MANAGE (upload, delete, etc.):
@@ -72,4 +91,4 @@ Please note that you may need to modify the commands based on your operating sys
 Please note that you may need to modify the commands based on your operating system and Python environment.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/thekaranaitc/cli2cloud/blob/main/LICENSE).
+Licensed under [MIT License](https://github.com/thekaranatic/cli2cloud/blob/main/LICENSE)
