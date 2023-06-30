@@ -91,5 +91,8 @@ Please note that you may need to modify the commands based on your operating sys
 
 Please note that you may need to modify the commands based on your operating system and Python environment.
 
+## Demo
+[Watch the demo](https://vimeo.com/836294019)
+
 ## License
 Licensed under [MIT License](https://github.com/thekaranatic/cli2cloud/blob/main/LICENSE)
