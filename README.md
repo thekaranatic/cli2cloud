@@ -25,21 +25,15 @@ The app facilitates following commands
 
 `-h` `--help`   :   About application
 
-
 `-newb` `--newbucket`   :   Create new bucket on the cloud
-
 
 `-delb` `--deletebucket`   :   Delete bucket from the cloud
 
-
 `-up` `--upload`   :   Upload files to the cloud
-
 
 `-del` `--delete`   :   Delete files from the cloud
 
-
 `-dwl` `--download`   :   Download files from the cloud
-
 
 `-ls` `--list`   :   List files from the cloud
 
@@ -52,6 +46,7 @@ The app facilitates following commands
 
 ## Installation:
 1. Create an account and your project on Appwrite and copy API Endpoint, Project ID & API Key
+
 ![appwrite-projectId](https://github.com/thekaranatic/cli2cloud/blob/main/img/appwrite-projectID.png)
 ![appwrite-apiKey](https://github.com/thekaranatic/cli2cloud/blob/main/img/appwrite-api-key.png)
 
