@@ -17,6 +17,7 @@ Released under [MIT](/LICENSE) by [@thekaranatic](https://github.com/thekaranati
 
 
 ![cli2cloud logo cover](https://github.com/thekaranatic/cli2cloud/blob/main/cli2cloud-logo-final-v2.png)
+
 # cli2cloud
 
 This is a Python-based CLI app that provides easy and efficient file management capabilities, including uploading, deleting, downloading, and listing files over the cloud. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease
@@ -90,6 +91,9 @@ Please note that you may need to modify the commands based on your operating sys
 4. Start managing your files!
 
 Please note that you may need to modify the commands based on your operating system and Python environment.
+
+## Demo
+[Watch the demo](https://vimeo.com/836294019)
 
 ## License
 Licensed under [MIT License](https://github.com/thekaranatic/cli2cloud/blob/main/LICENSE)
