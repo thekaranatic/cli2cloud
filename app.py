@@ -70,11 +70,10 @@ from time import sleep
 from appwrite.client import Client
 from appwrite.services.storage import Storage
 from appwrite.input_file import InputFile
-from appwrite.services.account import Account
 
 # import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
 from fileformats import tuple_fileformats as ext
-from env_var import API_KEY, PROJECT_ID
+from creds import API_ENDPOINT,PROJECT_ID, API_KEY
 
 __author__ = "Karan Kakati"
 __copyright__ = "Copyright 2023, Karan Kakati"
@@ -90,6 +89,9 @@ __status__ = "Production"
 # the messages below will be used relatively to prompt that there is an error with files
 INVALID_FILETYPE_MSG = "🙀 ERROR: %s is either invalid or we do not support this file. Please re-check the file."
 INVALID_PATH_MSG = "🙀 ERROR: Looks like file path/name is invalid. '%s' does not exist."
+
+# def configure():
+#     load_dotenv
 
 def validate_file(filename):
     """
@@ -129,7 +131,7 @@ def get_file_id(filename):
     client = Client()
 
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_endpoint(API_ENDPOINT) # API Endpoint
         .set_project(PROJECT_ID) # project ID
         .set_key(API_KEY) # secret API key
     )
@@ -170,7 +172,7 @@ def upload(args):
     client = Client()
 
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_endpoint(API_ENDPOINT) # API Endpoint
         .set_project(PROJECT_ID) # project ID
         .set_key(API_KEY) # secret API key
     )
@@ -202,7 +204,7 @@ def delete(args):
     client = Client()
 
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_endpoint(API_ENDPOINT) # API Endpoint
         .set_project(PROJECT_ID) # project ID
         .set_key(API_KEY) # secret API key
     )
@@ -239,7 +241,7 @@ def download(args):
     client = Client()
 
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_endpoint(API_ENDPOINT) # API Endpoint
         .set_project(PROJECT_ID) # project ID
         .set_key(API_KEY) # secret API key
     )
@@ -285,7 +287,7 @@ def list_files():
 
     client = Client()
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_endpoint(API_ENDPOINT) # API Endpoint
         .set_project(PROJECT_ID) # project ID
         .set_key(API_KEY) # secret API key
     )
@@ -350,14 +352,14 @@ def new_bucket():
 
     # project settings
     (client
-        .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+        .set_endpoint(API_ENDPOINT) # API Endpoint
         .set_project(PROJECT_ID) # project ID
         .set_key(API_KEY) # secret API key
     )
 
     # create a random alphanumeric string for Bucket ID always followed by prefix 'C2CBUCK'
     BUCKET_ID_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
-    BUCKET_ID = "c2cbuck" + BUCKET_ID_RAND
+    BUCKET_ID = "srujan" + BUCKET_ID_RAND
 
     BUCKET_NAME_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
     BUCKET_NAME = "buckname" + BUCKET_NAME_RAND
@@ -389,7 +391,7 @@ def del_bucket():
 
         # project settings
         (client
-            .set_endpoint('https://cloud.appwrite.io/v1') # API Endpoint
+            .set_endpoint(API_ENDPOINT) # API Endpoint
             .set_project(PROJECT_ID) # project ID
             .set_key(API_KEY) # secret API key
         )
@@ -410,6 +412,8 @@ def del_bucket():
     
 
 def main():
+
+
     parser = argparse.ArgumentParser(description="CLI2CLOUD is a Python CLI app for effortless file management tasks such as uploading, deleting, downloading, and listing files. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease", 
                                      epilog="Made with ❤️ by https://github.com/thekaranatic")
 
