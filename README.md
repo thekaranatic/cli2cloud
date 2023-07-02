@@ -73,8 +73,9 @@ Please note that you may need to modify the commands based on your operating sys
 ## Prerequisites:
 - Python 3.x
 - Required Python packages (install using `pip`):
-    - argparse
-    - rich
+    - Appwrite Python SDK (`appwrite`)
+    - `argparse`
+    - `rich`
 
 ## Installation:
 1. Clone the repository IN A DIRECTORY OF FILES YOU WOULD LIKE TO MANAGE (upload, delete, etc.):
