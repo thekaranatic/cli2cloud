@@ -50,7 +50,7 @@ The app facilitates following commands
 ![appwrite-projectId](https://github.com/thekaranatic/cli2cloud/blob/main/img/appwrite-projectID.png)
 ![appwrite-apiKey](https://github.com/thekaranatic/cli2cloud/blob/main/img/appwrite-api-key.png)
 
-2. Paste the strings to the variables below in `creds.py` file
+2. Paste the strings into the variables below in `creds.py` file
 
 
 ![variables](https://github.com/thekaranatic/cli2cloud/blob/main/img/vars.png) 
