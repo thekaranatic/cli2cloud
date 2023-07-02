@@ -1,3 +1,5 @@
+![cli2cloud logo cover](https://github.com/thekaranatic/cli2cloud/blob/main/img/cli2cloud-logo-final-v2.png)
+
 [![thekaranatic - cli2cloud](https://img.shields.io/static/v1?label=thekaranatic&message=cli2cloud&color=blue&logo=github)](https://github.com/thekaranatic/cli2cloud "Go to GitHub repo")
 [![stars - cli2cloud](https://img.shields.io/github/stars/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud)
 [![forks - cli2cloud](https://img.shields.io/github/forks/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud)
@@ -12,11 +14,6 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 Released under [MIT](/LICENSE) by [@thekaranatic](https://github.com/thekaranatic).
-
-
-
-
-![cli2cloud logo cover](https://github.com/thekaranatic/cli2cloud/blob/main/img/cli2cloud-logo-final-v2.png)
 
 # cli2cloud
 
