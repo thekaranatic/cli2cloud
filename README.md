@@ -1,3 +1,5 @@
+![cli2cloud logo cover](https://github.com/thekaranatic/cli2cloud/blob/main/img/cli2cloud-logo-final-v2.png)
+
 [![thekaranatic - cli2cloud](https://img.shields.io/static/v1?label=thekaranatic&message=cli2cloud&color=blue&logo=github)](https://github.com/thekaranatic/cli2cloud "Go to GitHub repo")
 [![stars - cli2cloud](https://img.shields.io/github/stars/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud)
 [![forks - cli2cloud](https://img.shields.io/github/forks/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud)
@@ -12,11 +14,6 @@
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 Released under [MIT](/LICENSE) by [@thekaranatic](https://github.com/thekaranatic).
-
-
-
-
-![cli2cloud logo cover](https://github.com/thekaranatic/cli2cloud/blob/main/cli2cloud-logo-final-v2.png)
 
 # cli2cloud
 
@@ -46,6 +43,36 @@ The app facilitates following commands
 
 `-ls` `--list`   :   List files from the cloud
 
+## Prerequisites:
+- Python 3.x
+- Required Python packages (install using `pip`):
+    - Appwrite Python SDK (`appwrite`)
+    - `argparse`
+    - `rich`
+
+## Installation:
+1. Create an account and your project on Appwrite and copy API Endpoint, Project ID & API Key
+![appwrite-projectId](https://github.com/thekaranatic/cli2cloud/blob/main/img/appwrite-projectID.png)
+![appwrite-apiKey](https://github.com/thekaranatic/cli2cloud/blob/main/img/appwrite-api-key.png)
+
+2. Paste the strings to the variables below in `creds.py` file
+
+
+![variables](https://github.com/thekaranatic/cli2cloud/blob/main/img/vars.png) 
+
+3. Clone the repository IN A DIRECTORY OF FILES YOU WOULD LIKE TO MANAGE (upload, delete, etc.):
+    git clone https://github.com/thekaranatic/cli2cloud.git
+
+4. Navigate to the project directory:
+    cd cli2cloud
+
+5. Install the required packages:
+    pip install -r requirements.txt
+
+6. Start managing your files!
+
+Please note that you may need to modify the commands based on your operating system and Python environment.
+
 
 ## Usage
 1. Create a bucket first
@@ -70,27 +97,6 @@ The app facilitates following commands
 
 Please note that you may need to modify the commands based on your operating system and Python environment.
 
-
-## Prerequisites:
-- Python 3.x
-- Required Python packages (install using `pip`):
-    - Appwrite Python SDK (`appwrite`)
-    - `argparse`
-    - `rich`
-
-## Installation:
-1. Clone the repository IN A DIRECTORY OF FILES YOU WOULD LIKE TO MANAGE (upload, delete, etc.):
-    git clone https://github.com/thekaranatic/cli2cloud.git
-
-2. Navigate to the project directory:
-    cd cli2cloud
-
-3. Install the required packages:
-    pip install -r requirements.txt
-
-4. Start managing your files!
-
-Please note that you may need to modify the commands based on your operating system and Python environment.
 
 ## Demo
 [Watch the demo](https://vimeo.com/836294019)
