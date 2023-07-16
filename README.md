@@ -2,8 +2,7 @@
 
 # cli2cloud
 
-[![thekaranatic - cli2cloud](https://img.shields.io/static/v1?label=thekaranatic&message=cli2cloud&color=blue&logo=github)](https://github.com/thekaranatic/cli2cloud "Go to GitHub repo") [![stars - cli2cloud](https://img.shields.io/github/stars/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud) [![forks - cli2cloud](https://img.shields.io/github/forks/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud) [![wakatime](https://wakatime.com/badge/user/bf88ca6a-7335-436d-bf81-82f32bc434c2/project/b551b3c7-6b8c-4b04-82d4-6e27488c3113.svg)](https://wakatime.com/badge/user/bf88ca6a-7335-436d-bf81-82f32bc434c2/project/b551b3c7-6b8c-4b04-82d4-6e27488c3113) [![Generic badge](https://img.shields.io/badge/version-0.9.9-yellow.svg)](https://shields.io/) [![made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
-![built with appwrite](https://img.shields.io/badge/Appwrite-F02E65?style=for-the-badge&logo=Appwrite&logoColor=black) [![GitHub release](https://img.shields.io/github/release/thekaranatic/cli2cloud?include_prereleases=&sort=semver&color=blue)](https://github.com/thekaranatic/cli2cloud/releases/) [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
+[![thekaranatic - cli2cloud](https://img.shields.io/static/v1?label=thekaranatic&message=cli2cloud&color=blue&logo=github)](https://github.com/thekaranatic/cli2cloud "Go to GitHub repo") [![stars - cli2cloud](https://img.shields.io/github/stars/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud) [![forks - cli2cloud](https://img.shields.io/github/forks/thekaranatic/cli2cloud?style=social)](https://github.com/thekaranatic/cli2cloud) [![wakatime](https://wakatime.com/badge/user/bf88ca6a-7335-436d-bf81-82f32bc434c2/project/b551b3c7-6b8c-4b04-82d4-6e27488c3113.svg)](https://wakatime.com/badge/user/bf88ca6a-7335-436d-bf81-82f32bc434c2/project/b551b3c7-6b8c-4b04-82d4-6e27488c3113) [![Generic badge](https://img.shields.io/badge/version-0.9.9-yellow.svg)](https://shields.io/) [![GitHub release](https://img.shields.io/github/release/thekaranatic/cli2cloud?include_prereleases=&sort=semver&color=blue)](https://github.com/thekaranatic/cli2cloud/releases/) [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 
 This is a Python-based CLI app that provides easy and efficient file management capabilities, including uploading, deleting, downloading, and listing files over the cloud. Whether you're a developer, a data analyst, or simply someone who needs to efficiently manage files, cli2cloud empowers you to take control of your files with ease
 
@@ -104,4 +103,6 @@ Please note that you may need to modify the commands based on your operating sys
 [Watch the demo](https://vimeo.com/836294019)
 
 ## License
+[![made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/) ![built with appwrite](https://img.shields.io/badge/Appwrite-F02E65?style=for-the-badge&logo=Appwrite&logoColor=black)
+
 Licensed under [MIT License](https://github.com/thekaranatic/cli2cloud/blob/main/LICENSE) by [@thekaranatic](https://github.com/thekaranatic).
