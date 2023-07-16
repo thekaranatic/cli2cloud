@@ -48,6 +48,10 @@ Feel free to contribute and make this app even better!
 # import standard 'os' & 'pathlib' module to perform file operations 
 import os
 
+# Load environment variables for the instance
+from dotenv import load_dotenv
+load_dotenv()
+
 # for operations regarding creating dirs, generating rand str
 from pathlib import Path
 import random as rnd
@@ -73,7 +77,12 @@ from appwrite.input_file import InputFile
 
 # import 'fileformats.py' file to use the list 'list_file-formats' to validate filetypes 
 from fileformats import tuple_fileformats as ext
-from creds import API_ENDPOINT,PROJECT_ID, API_KEY
+# from creds import API_ENDPOINT,PROJECT_ID, API_KEY
+
+
+API_ENDPOINT = os.getenv('API_ENDPOINT')
+PROJECT_ID = os.getenv('PROJECT_ID')
+API_KEY = os.getenv('API_KEY')
 
 __author__ = "Karan Kakati"
 __copyright__ = "Copyright 2023, Karan Kakati"
