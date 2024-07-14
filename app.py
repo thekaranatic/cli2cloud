@@ -368,7 +368,7 @@ def new_bucket():
 
     # create a random alphanumeric string for Bucket ID always followed by prefix 'C2CBUCK'
     BUCKET_ID_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
-    BUCKET_ID = "srujan" + BUCKET_ID_RAND
+    BUCKET_ID = "buckId" + BUCKET_ID_RAND
 
     BUCKET_NAME_RAND = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(0,13))
     BUCKET_NAME = "buckname" + BUCKET_NAME_RAND
